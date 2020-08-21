@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Korisnik implements Serializable {
 
-	private String ime, prezime, korisnickoIme, uloga;
+	private String ime, prezime, korisnickoIme, uloga, sifra;
 	private boolean izbrisan;
 
 	public String getIme() {
@@ -45,6 +45,14 @@ public class Korisnik implements Serializable {
 
 	public void setIzbrisan(boolean izbrisan) {
 		this.izbrisan = izbrisan;
+	}
+
+	public String getSifra() {
+		return sifra;
+	}
+
+	public void setSifra(String sifra) {
+		this.sifra = sifra;
 	}
 
 }

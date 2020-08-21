@@ -11,15 +11,19 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+
+import apoteka.Stanje;
+import apoteka.logika.Korisnici;
+import apoteka.model.Korisnik;
 
 public class Pocetna extends JPanel {
 	private JTextField textField;
@@ -29,10 +33,7 @@ public class Pocetna extends JPanel {
 		setLayout(null);
 
 		JButton btnNewButton = new JButton("Login");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewButton.setBounds(540, 260, 100, 60);
 		btnNewButton.setBackground(new Color(135, 198, 236));
@@ -74,6 +75,21 @@ public class Pocetna extends JPanel {
 		textField_1.setBorder(new MatteBorder(0, 0, 1, 0, Color.BLACK));
 		textField_1.setBackground(new Color(135, 198, 236));
 		panel.add(textField_1);
+
+		// -----
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String sifra = textField_1.getText();
+				String ime = textField.getText();
+				Korisnik k = Korisnici.uloguj(ime, sifra);
+				if (k == null) {
+					JOptionPane.showMessageDialog(null, "Pogresna sifra ili korisnicko ime");
+					return;
+				}
+				Stanje.getInstanca().setUlogovan(k);
+				GlavniProzor.getInstanca().prikaziStranicu("glavna");
+			}
+		});
 	}
 
 	@Override
@@ -84,7 +100,6 @@ public class Pocetna extends JPanel {
 		Image background = null;
 
 		File f = new File("./slike/pocetna.png");
-		
 
 		try {
 			background = ImageIO.read(f);

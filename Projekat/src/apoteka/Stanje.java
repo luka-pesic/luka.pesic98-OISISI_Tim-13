@@ -5,6 +5,7 @@ import java.util.List;
 
 import apoteka.model.Korisnik;
 import apoteka.model.Lek;
+import apoteka.model.Racun;
 import apoteka.model.Recept;
 
 public class Stanje {
@@ -13,10 +14,13 @@ public class Stanje {
 	private List<Korisnik> korisnici;
 	private List<Lek> lekovi;
 	private List<Recept> recepti;
+	private List<Racun> racuni;
+	private Racun korpa;
 
 	private Recept trenutniRecept = new Recept();// recept koji se renutno kreira
 
 	private Stanje() {
+		korpa=new Racun();
 		korisnici = (List<Korisnik>) ucitavanje("./korisnici.d");
 		if (korisnici == null) {
 			korisnici = new LinkedList<Korisnik>();
@@ -32,6 +36,10 @@ public class Stanje {
 		recepti = (List<Recept>) ucitavanje("./recepti.d");
 		if (recepti == null)
 			recepti = new LinkedList<>();
+
+		racuni = (List<Racun>) ucitavanje("./racuni.d");
+		if (racuni == null)
+			racuni = new LinkedList<>();
 
 	}
 
@@ -85,6 +93,22 @@ public class Stanje {
 	public void setTrenutniRecept(Recept trenutniRecept) {
 		this.trenutniRecept = trenutniRecept;
 	}
+
+	public List<Racun> getRacuni() {
+		return racuni;
+	}
+
+	public void setRacuni(List<Racun> racuni) {
+		this.racuni = racuni;
+	}
+
+	public Racun getKorpa() {
+		return korpa;
+	}
+
+	public void setKorpa(Racun korpa) {
+		this.korpa = korpa;
+	}
 	
-	
+
 }

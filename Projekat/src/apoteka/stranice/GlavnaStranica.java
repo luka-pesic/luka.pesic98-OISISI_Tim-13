@@ -63,7 +63,6 @@ public class GlavnaStranica extends JPanel {
 	}
 
 	public void prikazi(String tekst) {
-		// TODO Auto-generated method stub
 		natpis.setText(tekst.toUpperCase());
 		JPanel prikaz = null;
 		if (tekst.equals("Korisnici")) {
@@ -77,6 +76,9 @@ public class GlavnaStranica extends JPanel {
 		} else if (tekst.equals("Odjava")) {
 			Stanje.getInstanca().setUlogovan(null);
 			GlavniProzor.getInstanca().prikaziStranicu("pocetna");
+
+		} else if (tekst.equals("Korpa")) {
+			prikaz = new PrikazKorpe();
 
 		}
 		if (prikaz != null) {

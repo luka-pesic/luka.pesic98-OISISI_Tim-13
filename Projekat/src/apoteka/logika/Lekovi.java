@@ -47,9 +47,13 @@ public class Lekovi {
 	}
 
 	public static Lek[] preuzmiBezRecepta() {
-		return (Lek[]) Stanje.getInstanca().getLekovi().stream()
-				.filter(item -> !item.isIzbrisan() && !item.isNaRecept()).collect(Collectors.toList())
-				.toArray(new Lek[0]);
+		return (Lek[]) Stanje.getInstanca().getLekovi().stream().filter(lek -> !lek.isIzbrisan() && !lek.isNaRecept())
+				.collect(Collectors.toList()).toArray(new Lek[0]);
+	}
+
+	public static String[] proizvodjaci() {
+		return (String[]) Stanje.getInstanca().getLekovi().stream().filter(lek -> !lek.isIzbrisan())
+				.map(lek -> lek.getProzvodjac()).distinct().collect(Collectors.toList()).toArray(new String[0]);
 	}
 
 }

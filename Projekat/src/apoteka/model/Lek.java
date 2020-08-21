@@ -2,10 +2,10 @@ package apoteka.model;
 
 import java.io.Serializable;
 
-public class Lek implements Serializable{
+public class Lek implements Serializable {
 	private String sifra, ime, prozvodjac;
 	private float cena;
-	private boolean izbrisan=false,naRecept;
+	private boolean izbrisan = false, naRecept;
 
 	public String getSifra() {
 		return sifra;
@@ -53,6 +53,11 @@ public class Lek implements Serializable{
 
 	public void setNaRecept(boolean naRecept) {
 		this.naRecept = naRecept;
+	}
+
+	@Override
+	public String toString() {
+		return ime + " (" + sifra + ")";
 	}
 
 }

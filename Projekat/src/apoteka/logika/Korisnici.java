@@ -37,4 +37,10 @@ public class Korisnici {
 			message += "Korisnièko ime vec posotji\r\n";
 		return message;
 	}
+
+	public static String[] apotekari() {
+		return (String[]) Stanje.getInstanca().getKorisnici().stream()
+				.filter(k -> !k.isIzbrisan() && k.getUloga().equals("Apotekar")).map(k -> k.getKorisnickoIme())
+				.distinct().collect(Collectors.toList()).toArray(new String[0]);
+	}
 }

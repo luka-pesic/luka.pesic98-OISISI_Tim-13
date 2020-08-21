@@ -80,6 +80,9 @@ public class GlavnaStranica extends JPanel {
 		} else if (tekst.equals("Korpa")) {
 			prikaz = new PrikazKorpe();
 
+		} else if (tekst.equals("Izvestaji")) {
+			prikaz = new PrikazIzvestaja();
+
 		}
 		if (prikaz != null) {
 			desni.removeAll();

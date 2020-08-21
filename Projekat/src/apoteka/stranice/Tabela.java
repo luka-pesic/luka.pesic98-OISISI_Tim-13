@@ -48,7 +48,10 @@ public class Tabela extends JTable {
 		if (isRowSelected(row)) {
 			c.setBackground(new Color(255, 255, 204));
 		} else {
-			c.setBackground(new Color(216, 236, 249));
+			if (column % 2 == 0)
+				c.setBackground(new Color(216, 236, 249));
+			else
+				c.setBackground(new Color(226, 246, 255));
 		}
 
 		return c;

@@ -1,5 +1,13 @@
 package apoteka;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,7 +28,7 @@ public class Stanje {
 	private Recept trenutniRecept = new Recept();// recept koji se renutno kreira
 
 	private Stanje() {
-		korpa=new Racun();
+		korpa = new Racun();
 		korisnici = (List<Korisnik>) ucitavanje("./korisnici.d");
 		if (korisnici == null) {
 			korisnici = new LinkedList<Korisnik>();
@@ -82,8 +90,22 @@ public class Stanje {
 	}
 
 	private Object ucitavanje(String fajl) {
-		// TODO implement
-		return null;
+		File f = new File(fajl);
+		ObjectInputStream objInStream = null;
+		Object ret = null;
+		try {
+			objInStream = new ObjectInputStream(new BufferedInputStream(new FileInputStream(f)));
+			ret = objInStream.readObject();
+		} catch (Exception e) {
+			System.out.println();
+		} finally {
+			try {
+				if (objInStream != null)
+					objInStream.close();
+			} catch (Exception e) {
+			}
+		}
+		return ret;
 	}
 
 	public Recept getTrenutniRecept() {
@@ -109,6 +131,29 @@ public class Stanje {
 	public void setKorpa(Racun korpa) {
 		this.korpa = korpa;
 	}
-	
+
+	public void sacuvajSve() {
+		sacuvaj(korisnici, "./korisnici.d");
+		sacuvaj(lekovi, "./lekovi.d");
+		sacuvaj(recepti, "./recepti.d");
+		sacuvaj(racuni, "./racuni.d");
+	}
+
+	private void sacuvaj(Object o, String putanja) {
+		File f = new File(putanja);
+		ObjectOutputStream objOutStream = null;
+		try {
+			objOutStream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(f)));
+			objOutStream.writeObject(o);
+		} catch (IOException e1) {
+		} finally {
+
+			try {
+				if (objOutStream != null)
+					objOutStream.close();
+			} catch (Exception e) {
+			}
+		}
+	}
 
 }

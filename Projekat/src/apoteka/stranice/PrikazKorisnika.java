@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.table.AbstractTableModel;
 
 import apoteka.logika.Korisnici;
 import apoteka.model.Korisnik;
@@ -21,6 +22,7 @@ import apoteka.stranice.modelitabela.KorisniciModelTabele;
 public class PrikazKorisnika extends JPanel {
 	private Component[] prethodno;
 	private JButton btnNewButton;
+	private Tabela tabela;
 
 	public PrikazKorisnika() {
 		setBackground(new Color(0, 0, 0, 0));
@@ -50,7 +52,7 @@ public class PrikazKorisnika extends JPanel {
 		donji.add(scrollPane);
 		scrollPane.setBackground(new Color(216, 236, 249));
 		scrollPane.getViewport().setBackground(new Color(216, 236, 249));
-		Tabela tabela = new Tabela();
+		tabela = new Tabela();
 		scrollPane.setViewportView(tabela);
 		tabela.setBackground(new Color(216, 236, 249));
 		tabela.setModel(new KorisniciModelTabele());
@@ -134,7 +136,6 @@ public class PrikazKorisnika extends JPanel {
 				for (Component c : prethodno)
 					donji.add(c);
 				donji.revalidate();
-
 				donji.repaint();
 			}
 		});
@@ -161,6 +162,7 @@ public class PrikazKorisnika extends JPanel {
 					return;
 				}
 				Korisnici.registracija(u);
+				((AbstractTableModel) tabela.getModel()).fireTableDataChanged();
 				button_6.doClick();
 
 			}

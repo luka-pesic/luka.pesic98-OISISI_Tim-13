@@ -10,6 +10,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+
+import apoteka.Stanje;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 
@@ -67,6 +70,13 @@ public class GlavnaStranica extends JPanel {
 			prikaz = new PrikazKorisnika();
 		} else if (tekst.equals("Lekovi")) {
 			prikaz = new PrikazLekova();
+
+		} else if (tekst.equals("Recepti")) {
+			prikaz = new PrikazRecepata();
+
+		} else if (tekst.equals("Odjava")) {
+			Stanje.getInstanca().setUlogovan(null);
+			GlavniProzor.getInstanca().prikaziStranicu("pocetna");
 
 		}
 		if (prikaz != null) {

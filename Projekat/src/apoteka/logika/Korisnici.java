@@ -7,7 +7,7 @@ import apoteka.model.Korisnik;
 
 public class Korisnici {
 	public static void registracija(Korisnik k) {
-
+		Stanje.getInstanca().getKorisnici().add(k);
 	}
 
 	// true ako je slobodno, u suprotnom false

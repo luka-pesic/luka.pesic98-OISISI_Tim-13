@@ -37,4 +37,8 @@ public class Recepti {
 		Stanje.getInstanca().getRecepti().add(r);
 	}
 
+	public static Recept pronadji(int sifra) {
+		return Stanje.getInstanca().getRecepti().stream().filter(r -> !r.isIzbrisan() && r.getSifra() == sifra)
+				.findFirst().orElse(null);
+	}
 }

@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Racun {
-	private String kupac, prodavacy;
+	private String kupac, prodavac;
 	private Date datum;
 	private int popust;
 	private float placeno;
@@ -19,12 +19,12 @@ public class Racun {
 		this.kupac = kupac;
 	}
 
-	public String getProdavacy() {
-		return prodavacy;
+	public String getProdavac() {
+		return prodavac;
 	}
 
-	public void setProdavacy(String prodavacy) {
-		this.prodavacy = prodavacy;
+	public void setProdavac(String prodavacy) {
+		this.prodavac = prodavacy;
 	}
 
 	public Date getDatum() {

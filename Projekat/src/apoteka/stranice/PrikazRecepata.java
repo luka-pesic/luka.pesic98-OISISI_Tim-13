@@ -131,24 +131,24 @@ public class PrikazRecepata extends JPanel {
 			donji.add(lblNewLabel_2);
 
 		JTextField textField = new JTextField();
-		textField.setBounds(100, 11, 100, 37);
+		textField.setBounds(100, 11, 150, 37);
 		if (selected == -1)
 			donji.add(textField);
 		textField.setColumns(10);
 
 		JComboBox box = new JComboBox(Lekovi.preuzmiSve().toArray());
-		box.setBounds(210, 11, 80, 37);
+		box.setBounds(260, 11, 80, 37);
 		if (selected == -1)
 			donji.add(box);
 		SpinnerModel sm = new SpinnerNumberModel(1, 1, null, 1);
 
 		JSpinner spinner = new JSpinner(sm);
-		spinner.setBounds(300, 11, 30, 37);
+		spinner.setBounds(350, 11, 50, 37);
 		if (selected == -1)
 			donji.add(spinner);
 
 		JButton dodajlek = new JButton("Dodaj");
-		dodajlek.setBounds(340, 11, 125, 37);
+		dodajlek.setBounds(410, 11, 125, 37);
 		if (selected == -1)
 			donji.add(dodajlek);
 		dodajlek.addActionListener(new ActionListener() {

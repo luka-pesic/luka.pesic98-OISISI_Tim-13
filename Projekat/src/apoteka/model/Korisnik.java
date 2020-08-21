@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Korisnik implements Serializable {
 
 	private String ime, prezime, korisnickoIme, uloga, sifra;
-	private boolean izbrisan;
+	private boolean izbrisan=false;
 
 	public String getIme() {
 		return ime;

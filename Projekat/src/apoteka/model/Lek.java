@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Lek implements Serializable{
 	private String sifra, ime, prozvodjac;
 	private float cena;
-	private boolean izbrisan;
+	private boolean izbrisan=false,naRecept;
 
 	public String getSifra() {
 		return sifra;
@@ -45,6 +45,14 @@ public class Lek implements Serializable{
 
 	public void setIzbrisan(boolean izbrisan) {
 		this.izbrisan = izbrisan;
+	}
+
+	public boolean isNaRecept() {
+		return naRecept;
+	}
+
+	public void setNaRecept(boolean naRecept) {
+		this.naRecept = naRecept;
 	}
 
 }

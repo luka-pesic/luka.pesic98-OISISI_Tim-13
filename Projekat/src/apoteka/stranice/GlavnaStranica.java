@@ -36,7 +36,7 @@ public class GlavnaStranica extends JPanel {
 
 		desni.setBounds(200, 90, 650, 480);
 		add(desni);
-	//	desni.setBackground(new Color(216, 236, 249));
+		// desni.setBackground(new Color(216, 236, 249));
 		desni.setLayout(new GridLayout());
 
 	}
@@ -65,6 +65,9 @@ public class GlavnaStranica extends JPanel {
 		JPanel prikaz = null;
 		if (tekst.equals("Korisnici")) {
 			prikaz = new PrikazKorisnika();
+		} else if (tekst.equals("Lekovi")) {
+			prikaz = new PrikazLekova();
+
 		}
 		if (prikaz != null) {
 			desni.removeAll();

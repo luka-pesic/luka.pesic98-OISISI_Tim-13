@@ -10,6 +10,7 @@ public class Recept implements Serializable {
 	private float cena;
 	private String pacijent, lekar;
 	private Date datum;
+	private boolean izbrisan = false;
 	private LinkedHashMap<String, Integer> lekovi = new LinkedHashMap<>();
 
 	public int getSifra() {
@@ -58,6 +59,14 @@ public class Recept implements Serializable {
 
 	public void setLekovi(LinkedHashMap<String, Integer> lekovi) {
 		this.lekovi = lekovi;
+	}
+
+	public boolean isIzbrisan() {
+		return izbrisan;
+	}
+
+	public void setIzbrisan(boolean izbrisan) {
+		this.izbrisan = izbrisan;
 	};
 
 }

@@ -26,7 +26,7 @@ public class Stanje {
 			korisnici = new LinkedList<Korisnik>();
 			Korisnik admin = new Korisnik();
 			admin.setKorisnickoIme("admin");
-			admin.setUloga("Apotekar");
+			admin.setUloga("Admin");
 			admin.setSifra("admin");
 			korisnici.add(admin);
 		}

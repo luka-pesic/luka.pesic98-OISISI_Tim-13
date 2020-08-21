@@ -5,7 +5,10 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 
+import javax.swing.DefaultRowSorter;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -13,16 +16,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.table.AbstractTableModel;
 
 import apoteka.Stanje;
 import apoteka.logika.Lekovi;
 import apoteka.model.Lek;
+import apoteka.stranice.modelitabela.KorpaModelTabele;
 import apoteka.stranice.modelitabela.LekoviModelTabele;
 
 public class PrikazLekova extends JPanel {
 	private Component[] prethodno;
 	private JButton btnNewButton;
-
+	private Tabela tabela;
 	public PrikazLekova() {
 		setBackground(new Color(0, 0, 0, 0));
 		setLayout(null);
@@ -52,10 +58,13 @@ public class PrikazLekova extends JPanel {
 		donji.add(scrollPane);
 		scrollPane.setBackground(new Color(216, 236, 249));
 		scrollPane.getViewport().setBackground(new Color(216, 236, 249));
-		Tabela tabela = new Tabela();
+		tabela = new Tabela();
 		scrollPane.setViewportView(tabela);
 		tabela.setBackground(new Color(216, 236, 249));
 		tabela.setModel(new LekoviModelTabele());
+		List<RowFilter<Object, Object>> f = new LinkedList<>();
+		f.add(Tabela.sakrijIzbrisane());
+		((DefaultRowSorter) tabela.getRowSorter()).setRowFilter(RowFilter.andFilter(f));
 
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -165,8 +174,10 @@ public class PrikazLekova extends JPanel {
 					JOptionPane.showMessageDialog(null, error);
 					return;
 				}
-				
+
 				button_6.doClick();
+				((AbstractTableModel) tabela.getModel()).fireTableDataChanged();
+
 
 			}
 		});

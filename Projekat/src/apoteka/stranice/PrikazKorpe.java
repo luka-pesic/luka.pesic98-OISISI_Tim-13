@@ -174,6 +174,7 @@ public class PrikazKorpe extends JPanel {
 				textField.setText("");
 				ukupno.setText("Ukupna cena: 0.0 ");
 				Stanje.getInstanca().setKorpa(new Racun());
+				((KorpaModelTabele) tabela.getModel()).fireTableDataChanged();
 			}
 		});
 		donji.add(poni);

@@ -16,6 +16,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.table.AbstractTableModel;
 
 import apoteka.Stanje;
 import apoteka.logika.Lekovi;
@@ -28,6 +29,7 @@ import apoteka.stranice.modelitabela.ReceptiModelTabele;
 public class PrikazRecepata extends JPanel {
 	private Component[] prethodno;
 	private JButton btnNewButton, detalji;
+	private Tabela tabelaa;
 
 	public PrikazRecepata() {
 		setBackground(new Color(0, 0, 0, 0));
@@ -65,16 +67,16 @@ public class PrikazRecepata extends JPanel {
 		donji.add(scrollPane);
 		scrollPane.setBackground(new Color(216, 236, 249));
 		scrollPane.getViewport().setBackground(new Color(216, 236, 249));
-		Tabela tabela = new Tabela();
-		scrollPane.setViewportView(tabela);
-		tabela.setBackground(new Color(216, 236, 249));
-		tabela.setModel(new ReceptiModelTabele());
+		tabelaa = new Tabela();
+		scrollPane.setViewportView(tabelaa);
+		tabelaa.setBackground(new Color(216, 236, 249));
+		tabelaa.setModel(new ReceptiModelTabele());
 
 		detalji.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int selected = tabela.getSelectedRow();
+				int selected = tabelaa.getSelectedRow();
 				if (selected == -1) {
 					JOptionPane.showMessageDialog(null, "Recept nije selektovan");
 					return;
@@ -221,6 +223,7 @@ public class PrikazRecepata extends JPanel {
 				Recepti.kreiraj(textField.getText());
 				poni.doClick();
 				button_6.doClick();
+				((AbstractTableModel) tabelaa.getModel()).fireTableDataChanged();
 
 			}
 		});

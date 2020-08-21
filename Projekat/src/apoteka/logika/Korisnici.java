@@ -22,4 +22,19 @@ public class Korisnici {
 						&& korisnik.getSifra().equals(sifra) && korisnik.getKorisnickoIme().equals(ime))
 				.findFirst().orElse(null);
 	}
+
+	public static String proveri(Korisnik u) {
+		String message = "";
+		if (u.getKorisnickoIme().equals(""))
+			message += "Korisnièko ime nije uneto\r\n";
+		if (u.getSifra().equals(""))
+			message += "Lozinka nije uneta\r\n";
+		if (u.getIme().equals(""))
+			message += "Ime nije uneto\r\n";
+		if (u.getPrezime().equals(""))
+			message += "Prezime nije uneto\r\n";
+		if (!proveriKorisnickoIme(u.getKorisnickoIme()))
+			message += "Korisnièko ime vec posotji\r\n";
+		return message;
+	}
 }

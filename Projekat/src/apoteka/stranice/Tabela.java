@@ -11,7 +11,6 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
 public class Tabela extends JTable {
@@ -29,8 +28,6 @@ public class Tabela extends JTable {
 		getTableHeader().setDefaultRenderer(new MyCoolTableHeaderRenderer());
 		setFillsViewportHeight(true);
 		setAutoCreateRowSorter(true);
-
-		setOpaque(false);
 	}
 
 	@Override
@@ -42,7 +39,6 @@ public class Tabela extends JTable {
 		if (isRowSelected(row)) {
 			c.setBackground(new Color(255, 255, 204));
 		} else {
-
 			c.setBackground(new Color(216, 236, 249));
 		}
 

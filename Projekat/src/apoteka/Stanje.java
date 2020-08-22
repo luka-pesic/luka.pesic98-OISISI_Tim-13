@@ -36,6 +36,8 @@ public class Stanje {
 			admin.setKorisnickoIme("admin");
 			admin.setUloga("Admin");
 			admin.setSifra("admin");
+			admin.setIme("admin");
+			admin.setPrezime("admin");
 			korisnici.add(admin);
 		}
 		lekovi = (List<Lek>) ucitavanje("./lekovi.d");

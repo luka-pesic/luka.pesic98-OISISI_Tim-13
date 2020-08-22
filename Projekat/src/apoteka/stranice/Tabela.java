@@ -19,6 +19,7 @@ import javax.swing.table.TableCellRenderer;
 
 import apoteka.Stanje;
 import apoteka.model.Korisnik;
+import apoteka.model.Recept;
 import apoteka.stranice.modelitabela.LekoviModelTabele;
 import apoteka.stranice.modelitabela.ReceptiModelTabele;
 
@@ -91,5 +92,35 @@ public class Tabela extends JTable {
 				return true;
 			}
 		};
+	}
+
+	public static RowFilter stringFilter(int kolona, String tekst) {
+		return RowFilter.regexFilter("(?i)" + tekst, kolona);
+	}
+
+	public static RowFilter<Object, Object> filterCene(float min, float max) {
+		return new RowFilter<Object, Object>() {
+			public boolean include(Entry<? extends Object, ? extends Object> entry) {
+				LekoviModelTabele t = (LekoviModelTabele) entry.getModel();
+				float cena = (float) t.getValueAt((int) entry.getIdentifier(), 3);
+				return cena >= min && cena <= max;
+
+			}
+		};
+
+	}
+
+	public static RowFilter<Object, Object> lekUReceptu(String lek) {
+		return new RowFilter<Object, Object>() {
+			public boolean include(Entry<? extends Object, ? extends Object> entry) {
+				Recept r = Stanje.getInstanca().getRecepti().get((int) entry.getIdentifier());
+				for (java.util.Map.Entry<String, Integer> m : r.getLekovi().entrySet()) {
+					if (m.getKey().equals(lek))
+						return true;
+				}
+				return false;
+			}
+		};
+
 	}
 }

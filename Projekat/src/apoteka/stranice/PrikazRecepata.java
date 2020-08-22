@@ -5,7 +5,11 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultRowSorter;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -14,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.AbstractTableModel;
@@ -30,6 +35,7 @@ public class PrikazRecepata extends JPanel {
 	private Component[] prethodno;
 	private JButton btnNewButton, detalji;
 	private Tabela tabelaa;
+	private JTextField textField_3;
 
 	public PrikazRecepata() {
 		setBackground(new Color(0, 0, 0, 0));
@@ -63,7 +69,7 @@ public class PrikazRecepata extends JPanel {
 		donji.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 630, 425);
+		scrollPane.setBounds(10, 34, 630, 402);
 		donji.add(scrollPane);
 		scrollPane.setBackground(new Color(216, 236, 249));
 		scrollPane.getViewport().setBackground(new Color(216, 236, 249));
@@ -103,7 +109,81 @@ public class PrikazRecepata extends JPanel {
 			}
 
 		});
+		// ------------------------
+		JLabel lblNewLabel = new JLabel("Atribut:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel.setBounds(10, 5, 67, 27);
+		donji.add(lblNewLabel);
 
+		JComboBox comboBox = new JComboBox();
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Sifra", "Lekar", "JMBG", "Lek" }));
+		comboBox.setSelectedIndex(0);
+		comboBox.setBounds(84, 5, 131, 27);
+		donji.add(comboBox);
+
+		JLabel lblVrednost = new JLabel("Vrednost:");
+		lblVrednost.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblVrednost.setBounds(220, 5, 92, 27);
+		donji.add(lblVrednost);
+
+		textField_3 = new JTextField();
+		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		textField_3.setBounds(310, 5, 115, 27);
+		donji.add(textField_3);
+		textField_3.setColumns(10);
+
+		JComboBox comboBox_1 = new JComboBox(Lekovi.preuzmiSve().toArray());
+		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		comboBox_1.setBounds(310, 5, 115, 27);
+		donji.add(comboBox_1);
+
+		comboBox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int sel = comboBox.getSelectedIndex();
+				textField_3.setVisible(sel != 3);
+				comboBox_1.setVisible(sel == 3);
+			}
+		});
+		comboBox.setSelectedIndex(0);
+		JButton btnNewButton_1 = new JButton("Trazi");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton_1.setBounds(560, 5, 80, 27);
+		donji.add(btnNewButton_1);
+		btnNewButton_1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				List<RowFilter<Object, Object>> f = new LinkedList<>();
+				f.add(Tabela.sakrijIzbrisane());
+
+				int sel = comboBox.getSelectedIndex();
+				switch (sel) {
+				case 0:
+					f.add(Tabela.stringFilter(0, textField_3.getText()));
+					break;
+				case 1:
+					f.add(Tabela.stringFilter(1, textField_3.getText()));
+					break;
+				case 2:
+					f.add(Tabela.stringFilter(2, (String) textField_3.getText()));
+					break;
+				case 3:
+					if (comboBox_1.getSelectedIndex() < 0) {
+						JOptionPane.showMessageDialog(null, "Nije izabran prozivodjac");
+						return;
+					}
+					f.add(Tabela.lekUReceptu(((Lek)comboBox_1.getSelectedItem()).getSifra()));
+				}
+
+				((DefaultRowSorter) tabelaa.getRowSorter()).setRowFilter(RowFilter.andFilter(f));
+			}
+		});
+		btnNewButton_1.doClick();
+
+		// -----------
 	}
 
 	private void prikaziDetalje(JPanel donji, int selected) {

@@ -30,6 +30,7 @@ public class Recepti {
 	public static void kreiraj(String text) {
 		Recept r = Stanje.getInstanca().getTrenutniRecept();
 		r.setDatum(new Date());
+		r.setPacijent(text);
 		r.setLekar(Stanje.getInstanca().getUlogovan().getKorisnickoIme());
 		r.setSifra((Stanje.getInstanca().getRecepti().size() + 1));
 		r.setCena((ukupnaCena((r))));
